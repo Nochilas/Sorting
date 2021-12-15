@@ -13,12 +13,12 @@ namespace sorting
         }
 
         //Generating
-        static int[] GenerateIntArr(int length)
+        static int[] GenerateIntArr(int length, int firstNum = 0, int lastNum = 9)
         {
             var rand = new Random();
             int[] nums = new int[length];
             for (int i = 0; i < nums.Length; i++)
-                    nums[i] = rand.Next(0, 9);
+                    nums[i] = rand.Next(firstNum, lastNum);
 
             return nums;
         }
