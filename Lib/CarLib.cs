@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 
 namespace CarLib
 {
-    class Car
+    class Car : IComparer
     {
         private string plate;
         public string Plate
@@ -19,5 +20,10 @@ namespace CarLib
 
         public Car()
             : this(string.Empty){}
+
+        int IComparer.Compare(Object x, Object y)
+        {
+            return string.Compare(((x as Car).Plate), ((y as Car).Plate));
+        }
     }
 }

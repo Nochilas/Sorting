@@ -1,5 +1,6 @@
 ﻿using System;
 using CarLib;
+using System.Collections;
 
 namespace sorting
 {
@@ -15,7 +16,7 @@ namespace sorting
         //Generating
         static int[] GenerateIntArr(int length, int firstNum = 0, int lastNum = 9)
         {
-            var rand = new Random();
+            Random rand = new Random();
             int[] nums = new int[length];
             for (int i = 0; i < nums.Length; i++)
                     nums[i] = rand.Next(firstNum, lastNum);
@@ -112,21 +113,7 @@ namespace sorting
 
         static Car[] CarSort(Car[] carArray)
         {
-            //Su questo non ho ancora fatto niente
-            Car safetyCar = new Car(string.Empty); //= temp for Car objects
-
-            for(int j = 0; j < carArray.Length; j++)
-                for(int i = 0; i < carArray.Length - 1; i++)
-                {
-                    int c = string.Compare(carArray[i].Plate, carArray[i+1].Plate);
-
-                    if(c > 0)
-                    {
-                        safetyCar = carArray[i];
-                        carArray[i] = carArray[i+1];
-                        carArray[i+1] = safetyCar;
-                    }
-                }
+            Array.Sort(carArray, new Car());
             return carArray;
         }
         
@@ -148,15 +135,13 @@ namespace sorting
             //Car array
             cars = GenerateCar(nCars, plates);
             
-            /*
             //Sorting the Car array
             cars = CarSort(cars);
-        
             
             //Check if carArray[] is sorted
             Console.WriteLine("Cars after sorting:");
             foreach(Car car in cars)
-                Console.WriteLine(car.Plate);*/
+                Console.WriteLine(car.Plate);
         }
     }
 }
