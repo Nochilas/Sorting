@@ -24,12 +24,12 @@ namespace sorting
             return nums;
         }
 
-        static string[] GeneratePlates(int nPlates = 10, int strLength = 3, int intArrIndex = 3)
+        static string[] GeneratePlates(int nPlates = 10, int strLength = 3, int intLength = 3)
         {
             string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             Random rand = new Random();
             string[] plates = new string[nPlates];
-            int[] nums = new int[intArrIndex];
+            int[] nums = new int[intLength];
             string strFirst = string.Empty;
             string strEnd = string.Empty;
             string strNum = string.Empty;
@@ -45,7 +45,7 @@ namespace sorting
                     strEnd += string.Concat(alphabet[rand.Next(0, alphabet.Length)]);
                 
                 //Generate array of random numbers
-                nums = GenerateIntArr(intArrIndex);
+                nums = GenerateIntArr(intLength);
                 //Sort the array of random numbers
                 nums = IntSort(nums);
                 //Turn nums[] in a string
@@ -62,8 +62,9 @@ namespace sorting
             return plates;
         }
 
-        static Car[] GenerateCar(int nCars, string[] plates)
+        static Car[] GenerateCar(int nCars)
         {
+            string[] plates = GeneratePlates(intLength : 10);
             Car[] cars = new Car[nCars];
 
             for(int i = 0; i < cars.Length; i++)
@@ -116,32 +117,49 @@ namespace sorting
             Array.Sort(carArray, new Car());
             return carArray;
         }
+
+        static Car[] CarSort2(Car[] carArray)
+        {
+            Car temp;
+            for (int i = 0; i < carArray.Length - 1; i++)
+                {
+                    Car comparer = new Car();
+                    int c = comparer.Compare(carArray[i], carArray[i+1]);
+                    if (c > 0)
+                    {
+                        temp = carArray[i];
+                        carArray[i] = carArray[i + 1];
+                        carArray[i + 1] = temp;
+                    }
+                }
+            return carArray;
+        }
         
         static void Main(string[] args)
         {   
-            const int nPlates = 10;
-            const int index = 10;
-            const int strLength = 3;
-            const int nCars = nPlates;
-            string[] plates = new string[nPlates];
+            const int nCars = 10;
             Car[] cars = new Car[nCars];
-            
-            //Generate strArr[] (array of 10 random strings)
-            plates = GeneratePlates(nPlates, strLength, index);
-            
-            foreach(string plate in plates)
-                Console.WriteLine(plate);
+            Car[] carss = new Car[nCars];
 
             //Car array
-            cars = GenerateCar(nCars, plates);
-            
-            //Sorting the Car array
-            cars = CarSort(cars);
-            
-            //Check if carArray[] is sorted
+            cars = GenerateCar(nCars);
+            carss = GenerateCar(nCars);
+
+            //Sorting the cars array
+            CarSort(cars);
+
+            //Check if cars[] is sorted
             Console.WriteLine("Cars after sorting:");
             foreach(Car car in cars)
                 Console.WriteLine(car.Plate);
+
+            //Sorting the carss array
+            CarSort(carss);
+
+            //Check if cars[] is sorted
+            Console.WriteLine("Carss after sorting:");
+            foreach(Car carr in carss)
+                Console.WriteLine(carr.Plate);
         }
     }
 }

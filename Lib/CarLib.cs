@@ -21,7 +21,7 @@ namespace CarLib
         public Car()
             : this(string.Empty){}
 
-        int IComparer.Compare(Object x, Object y)
+        public int Compare(Object x, Object y)
         {
             return string.Compare(((x as Car).Plate), ((y as Car).Plate));
         }
