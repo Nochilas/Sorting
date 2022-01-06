@@ -64,7 +64,7 @@ namespace sorting
 
         static Car[] GenerateCar(int nCars)
         {
-            string[] plates = GeneratePlates(intLength : 10);
+            string[] plates = GeneratePlates(intLength:10);
             Car[] cars = new Car[nCars];
 
             for(int i = 0; i < cars.Length; i++)
@@ -154,7 +154,7 @@ namespace sorting
                 Console.WriteLine(car.Plate);
 
             //Sorting the carss array
-            CarSort(carss);
+            CarSort2(carss);
 
             //Check if cars[] is sorted
             Console.WriteLine("Carss after sorting:");
